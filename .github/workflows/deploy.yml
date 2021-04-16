@@ -22,6 +22,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
+        env:
+          NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
+          NEXT_PUBLIC_CONTENTFUL_SPACE_ID: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_SPACE_ID }}
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile
       - run: yarn build
