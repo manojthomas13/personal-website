@@ -22,12 +22,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
+      - name: Install Dependencies
+        run: | # install and build
+          npm install -g yarn
+          yarn install --frozen-lockfile
+          yarn build
         env:
           NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
           NEXT_PUBLIC_CONTENTFUL_SPACE_ID: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_SPACE_ID }}
-      - run: npm install -g yarn
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
