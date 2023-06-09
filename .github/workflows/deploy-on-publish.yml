@@ -2,12 +2,12 @@
 
 name: Deploy On Contentful publish
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   repository_dispatch:
-    types: [ publish-event ]
-  
+    types: [publish-event]
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -36,3 +36,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
       - run: aws s3 sync ./out s3://manoj-thomas.co.uk
+      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION }} --paths "/*"
